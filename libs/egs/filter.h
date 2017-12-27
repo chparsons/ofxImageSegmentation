@@ -2,6 +2,7 @@
 #define FILTER_H
 
 #include <vector>
+#include <algorithm>
 #include <cmath>
 #include "image.h"
 #include "misc.h"
@@ -27,7 +28,7 @@ static void normalize(std::vector<float> &mask) {
 /* make filters */
 #define MAKE_FILTER(name, fun)                                \
 static std::vector<float> make_ ## name (float sigma) {       \
-  sigma = __max(sigma, 0.01F);			      \
+  sigma = std::max(sigma, 0.01F);			      \
   int len = (int)ceil(sigma * WIDTH) + 1;                     \
   std::vector<float> mask(len);                               \
   for (int i = 0; i < len; i++) {                             \
